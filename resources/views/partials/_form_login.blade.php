@@ -9,15 +9,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{-- {!! Form::open(array('class' => 'fancy-form', 'data-parsley-validate' => '', 'data-parsley-trigger' => 'change keyup')) !!}
-                    {{ Form::label('emailadres', 'E-mailadres:')}}
-                    {{ Form::text('emailadres', null, array('required' => '', 'maxlength' => '255', 'data-parsley-pattern' => "[0-9a-zA-ZàáâäãåąæčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,\.\'\-\?\!]+")) }}
-                    
-                    {{ Form::label('password', 'Wachtwoord:')}}
-                    {{ Form::text('password', null, array('required' => '', 'maxlength' => '255', 'data-parsley-pattern' => "[0-9a-zA-ZàáâäãåąæčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,\.\'\-\?\!]+")) }}
-                    
-                    {{ Form::submit('Login')}}
-                    {!! Form::close() !!} --}}
                     <form method="POST" action="{{ route('login') }}">
                             @csrf
     

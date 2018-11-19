@@ -1,7 +1,7 @@
 <div class="flex-section-footer flex-no-padding">
     <div class="flex-item flex-item-full">
         <div class="copyright">
-            <p class="text-align-center small-text text-hover">een iniatief van iconi</p>
+            {{-- <p class="text-align-center small-text text-hover">een iniatief van iconi</p> --}}
         </div>
     </div>
 </div>

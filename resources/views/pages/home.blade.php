@@ -1,38 +1,43 @@
 @extends('main')
 
 @section('addressBarTitle')
-    Aardbeving verhalen uit Groningen.
+Wat zal de Sint jou brengen?
 @endsection
 
-@section('pageTitle') 
-    Aard<i>beleving</i>
-@endsection
+{{-- @section('pageTitle') 
+Verlang-eisje
+@endsection --}}
 
-@section('content')                
-    <section class="flex-section"> 
-        
-        <div class="flex-item flex-item-600 flex-margin-10">
-            <h2 class="margin-20">De aardbevingen in Groningen</h2>
-            <p>Je hebt het ongetwijfeld gehoord, Groningen beeft.</p>
-            <p>Een aardbeving op 2.2 op de schaal van Richter, wat betekend dat eigenlijk?
-                Aardbeleving, wil de menselijke kant van een aardbeving laten zien, door het delen van verhalen.</p>
+@section('content')   
+        <div class="row">
+            <div class="col-md-6 offset-md-3 spacer-50"></div>
         </div>
 
-        {{-- <div class="flex-item flex-item-600 bg-white rounded-borders shadow-bottom flex-margin-10">                                                
-            <form action="/aardbeving-verhalen/register.php" method="POST" class="fancy-form" onsubmit="return validateForm()" id="registerForm" novalidate>
-                <label for="contactVoornaam" id="contactVoornaamLabel">Voornaam</label>
-                <input type="text" id="contactVoornaam" name="contact_voornaam" placeholder="Voornaam">
-                
-                <label for="contactEmail" id="contactEmailLabel">E-mailadres</label>
-                <input type="email" id="contactEmail" name="contactr_emailadres" placeholder="E-mailadres">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="sint"><img src="{{ asset('/images/sinterklaas.png') }}"></div>
+            </div>
+            
+            <div class="col-md-6 offset-md-3 bg-white padding-top-40">
+                <h1 class="display-3 text-align-center page-title">Lieve Sint..</h1>
+            </div>
+        </div>
 
-                <label for="contactBericht" id="contactEmailLabel">Uw bericht</label>
-                <textarea id="contactBericht" placeholder="Uw bericht"></textarea> 
-                
-                <input type="submit" name="submit" value="Verstuur" />
-            </form>
-        </div> --}}
-    </section>
+        <div class="row">
+            <div class="col-md-6 offset-md-3 bg-white">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, aperiam numquam? Illum cumque est temporibus quod magnam enim, eius amet dolores aliquid architecto?</p>
+                    </div>
+                            
+                    <div class="col-md-6">
+                        <p>2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, aperiam numquam? Illum cumque est temporibus quod magnam enim, eius amet dolores aliquid architecto?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 @endsection
 
 @section('footer') 

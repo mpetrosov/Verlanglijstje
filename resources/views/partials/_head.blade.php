@@ -11,7 +11,7 @@
     
     {{ Html::style('css/normalize.css') }}
     {{ Html::style('css/main.css') }}
-    {{ Html::style('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css') }}
+    {{ Html::style('css/bootstrap.css') }}
     {{ Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') }}
     
     @yield('customHead')
