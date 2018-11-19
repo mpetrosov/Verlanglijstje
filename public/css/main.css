@@ -81,7 +81,6 @@ body {
 }
 
 .nav-link:hover {
-    color: #333333 !important;
     border-bottom: #ffffff 2px solid;
 }
 
