@@ -2,7 +2,7 @@
     if ($user = Auth::user()){
 ?>
     <li class="nav-item">
-        <a class="nav-link {{ Request::is('/nieuw') ? "nav-active" : "" }}" href="/nieuw">nieuwe lijst</a>
+        <a class="nav-link {{ Request::is('/verlanglijstjes/create') ? "nav-active" : "" }}" href="/verlanglijstjes/create">nieuwe lijst</a>
     </li>
 <?php
     }

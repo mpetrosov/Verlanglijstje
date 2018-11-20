@@ -16,6 +16,7 @@ class CreateVerlanglijstjesTable extends Migration
         Schema::create('verlanglijstjes', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name');
+            $table->string('url');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });

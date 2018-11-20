@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Verlanglijstje;
 use Illuminate\Http\Request;
+
+use App\Verlanglijstje;
+use App\User;
+use Auth;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Session;
 
 class VerlanglijstjeController extends Controller
 {
@@ -11,6 +18,17 @@ class VerlanglijstjeController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyz')
+    {
+        $pieces = [];
+        $max = mb_strlen($keyspace, '8bit') - 1;
+        for ($i = 0; $i < $length; ++$i) {
+            $pieces []= $keyspace[random_int(0, $max)];
+        }
+        return implode('', $pieces);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +36,11 @@ class VerlanglijstjeController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::id();
+        $verlanglijstjes = Verlanglijstje::paginate(3);
+        $user = User::find($user)->verlanglijstje;
+        
+        return view('verlanglijstjes/index')->withVerlanglijstjes($verlanglijstjes)->withUser($user);
     }
 
     /**
@@ -40,23 +62,20 @@ class VerlanglijstjeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(
-            'naam' => 'required|min:2|max:255',
+            'naam' => 'required|min:2|max:255|alpha_num',
         ));
 
-        if (Auth::check())
-        {
-            $verlanglijstje = new Verlanglijstje;
-            $verlanglijstje->naam = $request->naam;
-            $verlanglijstje->user_id = Auth::id();
-            $verlanglijstje->save();
+        $user = Auth::id();
+        $verlanglijstje = new Verlanglijstje;
+        $verlanglijstje->name = $request->naam;
+        $verlanglijstje->user_id = $user;
+        $verlanglijstje->url = $this->random_str(8);
+        $verlanglijstje->save();
 
-            Session::flash('succes', 'Het lijstje' . $request->naam . 'is toegevoegd!');
-            // RETURN NAAR TOEVOEGEN ITEMS
-            return redirect()->route('posts.show', $post->id);
-        }
-
-
-
+        Session::flash('succes', 'Het lijstje is toegevoegd!');
+        // RETURN NAAR TOEVOEGEN ITEMS
+        // return redirect()->route('posts.show', $post->id);
+        return redirect()->route('home');
     }
 
     /**
@@ -67,7 +86,10 @@ class VerlanglijstjeController extends Controller
      */
     public function show(Verlanglijstje $verlanglijstje)
     {
-        //
+        $user = Auth::id();
+        $verlanglijstjes = User::find($user)->verlanglijstje;
+        
+        return view('verlanglijstjes/show')->withVerlanglijstjes($verlanglijstjes);
     }
 
     /**
@@ -78,7 +100,8 @@ class VerlanglijstjeController extends Controller
      */
     public function edit(Verlanglijstje $verlanglijstje)
     {
-        //
+        $verlanglijstje= Verlanglijstje::find($verlanglijstje);
+		return view('verlanglijstjes/edit')->withPost($verlanglijstje);
     }
 
     /**
@@ -90,7 +113,18 @@ class VerlanglijstjeController extends Controller
      */
     public function update(Request $request, Verlanglijstje $verlanglijstje)
     {
-        //
+        $this->validate($request, array(
+            'naam' => 'required|min:2|max:255|alpha_num',
+        ));
+
+        $verlanglijstje = Verlanglijstje::find($verlanglijstje);
+        $verlanglijstje->naam = $request->input('naam');
+        $verlanglijstje->save();
+
+        Session::flash('succes', 'Het lijstje is bijgewerkt!');
+        // RETURN NAAR TOEVOEGEN ITEMS
+        // return redirect()->route('posts.show', $post->id);
+        return redirect()->route('pages/home');
     }
 
     /**
@@ -101,6 +135,12 @@ class VerlanglijstjeController extends Controller
      */
     public function destroy(Verlanglijstje $verlanglijstje)
     {
-        //
+        $verlanglijstje = Verlanglijstje::find($verlanglijstje);
+        $verlanglijstjeTitel = $verlanglijstje->title;
+        $verlanglijstje->delete();
+        
+        Session::flash('succes', "$verlanglijstjeTitel is verwijderd");
+    
+        return redirect()->route('pages/home');
     }
 }

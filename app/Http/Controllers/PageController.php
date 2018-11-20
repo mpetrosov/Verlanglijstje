@@ -9,6 +9,4 @@ class PageController extends Controller
     public function getIndex(){
         return view('pages/home');
     }
-
-
 }

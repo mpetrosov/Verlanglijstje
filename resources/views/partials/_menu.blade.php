@@ -9,7 +9,7 @@
                 <a class="nav-link {{ Request::is('/') ? "nav-active" : "" }}" href="/">home</a>
             </li>
 
-            @include('/partials/menu/_menu_verlanglijstje')
+            @include('partials/menu/_menu_verlanglijstje')
 
             @include('partials/menu/_menu_register')
 

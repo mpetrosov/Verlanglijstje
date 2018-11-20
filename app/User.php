@@ -28,8 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getId()
-    {
-    return $this->id;
+    public function verlanglijstjes() {
+        return $this->hasMany('App\Verlanglijstje');
     }
 }

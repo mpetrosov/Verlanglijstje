@@ -13,13 +13,12 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/','PageController@getIndex');
+    Route::get('/','PageController@getIndex')->name('home');
 
-    Route::get('/nieuw', 'VerlanglijstjeController@create');
+    // Route::get('/nieuw', 'VerlanglijstjeController@create');
 
-    Route::resource('verlanglijstje', 'VerlanglijstjeController');
+    Route::resource('/verlanglijstjes', 'VerlanglijstjeController');
 
 });
-Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();

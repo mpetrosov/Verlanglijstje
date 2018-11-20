@@ -15,7 +15,7 @@ Wat zal de Sint jou brengen?
             </div>
             
             <div class="col-md-6 offset-md-3 bg-white padding-top-40">
-                <h1 class="display-4 text-align-center page-title">Maak een nieuw lijstje</h1>
+                <h1 class="display-4 text-align-center page-title">Bewerk {{ $verlanglijstje->naam }}</h1>
             </div>
         </div>
 
@@ -28,7 +28,8 @@ Wat zal de Sint jou brengen?
                     </div>
 
                     <div class="col-md-6">
-                            {!! Form::open(array('route' => 'verlanglijstjes.store' )) !!}
+                        <form action="{{ route('verlanglijstjes.update', [$verlanglijstje->id]) }}" method="POST">
+                            {{method_field('PATCH')}}
                             {{ csrf_field() }}
 
                             <div class="form-group row">
@@ -40,7 +41,7 @@ Wat zal de Sint jou brengen?
                                     <button type="submit" class="btn btn-outline-primary btn-block">Sla op</button>
                                 </div>
                             </div>
-                        {!! Form::close() !!}
+                        </form>
                     </div>
                 </div>
             </div>
