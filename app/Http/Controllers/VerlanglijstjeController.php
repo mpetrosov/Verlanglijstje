@@ -36,10 +36,11 @@ class VerlanglijstjeController extends Controller
      */
     public function index()
     {
-        $verlanglijstjes = Verlanglijstje::paginate(3);
-        // $user = User::find($user)->verlanglijstje;
-        
-        // ->withUser($user)
+        // $verlanglijstjes = Verlanglijstje::paginate(5);
+        $user = Auth::id();
+        $verlanglijstjes = Verlanglijstje::where('user_id', "=", "$user")
+        ->paginate(5); 
+
         return view('verlanglijstjes/index')->withVerlanglijstjes($verlanglijstjes);
     }
 
@@ -141,10 +142,11 @@ class VerlanglijstjeController extends Controller
         $verlanglijstje = Verlanglijstje::find($id);
         $verlanglijstje->delete();
         
-        Session::flash('succes', "het lijstje is verwijderd");
         
-        $verlanglijstjes = Verlanglijstje::paginate(3);
-
+        $user = Auth::id();
+        $verlanglijstjes = Verlanglijstje::where('user_id', "=", "$user")->paginate(5); 
+        
+        Session::flash('succes', "het lijstje is verwijderd");
         return view('verlanglijstjes/index')->withVerlanglijstjes($verlanglijstjes);
     }
 }
