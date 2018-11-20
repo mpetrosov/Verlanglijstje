@@ -17,6 +17,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::resource('/verlanglijstjes', 'VerlanglijstjeController');
 
+    Route::get('/{slug}', 'PageController@getSharedList');
+
 });
 
 Auth::routes();

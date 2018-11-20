@@ -2,7 +2,7 @@
 @extends('main')
 
 @section('addressBarTitle')
-{{-- Bewerk {{ $verlanglijstje->name }} --}}
+Bewerk {{ $verlanglijstje->name }}
 @endsection
 
 @section('content')   
@@ -48,8 +48,6 @@
                 </div>
             </div>
         </div>
-
-
 @endsection
 
 @section('footer') 

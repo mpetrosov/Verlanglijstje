@@ -103,9 +103,6 @@ class VerlanglijstjeController extends Controller
     {
         $verlanglijstje = Verlanglijstje::find($id)->first();
         return view('verlanglijstjes/edit')->withVerlanglijstje($verlanglijstje);
-        
-        // $post = Post::find($id);
-		// return view('posts.edit')->withPost($post);
     }
 
     /**
@@ -126,8 +123,6 @@ class VerlanglijstjeController extends Controller
         $verlanglijstje->save();
 
         Session::flash('succes', 'Het lijstje is bijgewerkt!');
-        // RETURN NAAR TOEVOEGEN ITEMS
-        // return redirect()->route('posts.show', $post->id);
         return redirect()->route('home');
     }
 
