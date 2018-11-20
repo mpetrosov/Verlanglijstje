@@ -36,11 +36,11 @@ class VerlanglijstjeController extends Controller
      */
     public function index()
     {
-        $user = Auth::id();
         $verlanglijstjes = Verlanglijstje::paginate(3);
-        $user = User::find($user)->verlanglijstje;
+        // $user = User::find($user)->verlanglijstje;
         
-        return view('verlanglijstjes/index')->withVerlanglijstjes($verlanglijstjes)->withUser($user);
+        // ->withUser($user)
+        return view('verlanglijstjes/index')->withVerlanglijstjes($verlanglijstjes);
     }
 
     /**
@@ -98,9 +98,9 @@ class VerlanglijstjeController extends Controller
      * @param  \App\Verlanglijstje  $verlanglijstje
      * @return \Illuminate\Http\Response
      */
-    public function edit(Verlanglijstje $id)
+    public function edit($id)
     {
-        $verlanglijstje = Verlanglijstje::find($id);
+        $verlanglijstje = Verlanglijstje::find($id)->first();
         return view('verlanglijstjes/edit')->withVerlanglijstje($verlanglijstje);
         
         // $post = Post::find($id);
@@ -114,20 +114,20 @@ class VerlanglijstjeController extends Controller
      * @param  \App\Verlanglijstje  $verlanglijstje
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Verlanglijstje $verlanglijstje)
+    public function update(Request $request, $id)
     {
         $this->validate($request, array(
             'naam' => 'required|min:2|max:255|alpha_num',
         ));
 
-        $verlanglijstje = Verlanglijstje::find($verlanglijstje);
-        $verlanglijstje->naam = $request->input('naam');
+        $verlanglijstje = Verlanglijstje::find($id);
+        $verlanglijstje->name = $request->input('naam');
         $verlanglijstje->save();
 
         Session::flash('succes', 'Het lijstje is bijgewerkt!');
         // RETURN NAAR TOEVOEGEN ITEMS
         // return redirect()->route('posts.show', $post->id);
-        return redirect()->route('pages/home');
+        return redirect()->route('home');
     }
 
     /**
@@ -136,14 +136,15 @@ class VerlanglijstjeController extends Controller
      * @param  \App\Verlanglijstje  $verlanglijstje
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Verlanglijstje $verlanglijstje)
+    public function destroy($id)
     {
-        $verlanglijstje = Verlanglijstje::find($verlanglijstje);
-        $verlanglijstjeTitel = $verlanglijstje->title;
+        $verlanglijstje = Verlanglijstje::find($id);
         $verlanglijstje->delete();
         
-        Session::flash('succes', "$verlanglijstjeTitel is verwijderd");
-    
-        return redirect()->route('pages/home');
+        Session::flash('succes', "het lijstje is verwijderd");
+        
+        $verlanglijstjes = Verlanglijstje::paginate(3);
+
+        return view('verlanglijstjes/index')->withVerlanglijstjes($verlanglijstjes);
     }
 }

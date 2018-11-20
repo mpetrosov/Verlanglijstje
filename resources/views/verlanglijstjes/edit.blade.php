@@ -1,7 +1,8 @@
+
 @extends('main')
 
 @section('addressBarTitle')
-Wat zal de Sint jou brengen?
+{{-- Bewerk {{ $verlanglijstje->name }} --}}
 @endsection
 
 @section('content')   
@@ -10,6 +11,7 @@ Wat zal de Sint jou brengen?
         </div>
 
         <div class="row">
+            
             <div class="col-md-6 offset-md-3">
                 <div class="sint"><img src="{{ asset('/images/sinterklaas.png') }}"></div>
             </div>
@@ -34,7 +36,7 @@ Wat zal de Sint jou brengen?
 
                             <div class="form-group row">
                                 <div class="col-md-12 my-2">
-                                    <input id="name" type="text" class="form-control" name="name" placeholder="{{ $verlanglijstje->name }}" required autofocus>
+                                    <input id="naam" type="text" class="form-control" name="naam" placeholder="{{ $verlanglijstje->name }}" required autofocus>
                                 </div>
 
                                 <div class="col-md-12 my-2">

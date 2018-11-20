@@ -39,7 +39,7 @@ Wat zal de Sint jou brengen?
                         <tr>
                             <td><a href="/verlanglijstjes/{{$verlanglijstje->id}}">{{ $verlanglijstje->name }}</a>
                             </td>
-                            <td>{{ App\verlanglijstje::find(1)->user['name'] }}</td>
+                            <td>{{ $verlanglijstje->user['name'] }}</td>
                             <td><a href="{{ url('/') . '/' . $verlanglijstje->url }}">{{ url('/') . '/' . $verlanglijstje->url }}</a></td>
                             <td>{{ date('j F, o', strtotime($verlanglijstje->created_at)) }}</td>
                             <td>{{ date('j F, o', strtotime($verlanglijstje->updated_at)) }}</td>
@@ -62,7 +62,7 @@ Wat zal de Sint jou brengen?
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Wil je de lijst <b>"{{ substr($verlanglijstje->title, 0, 50) }}{{ strlen($verlanglijstje->title) > 50 ? "..." : ""}}"</b> verwijderen?
+                                                    <p>Wil je de lijst <b>"{{ substr($verlanglijstje->name, 0, 50) }}{{ strlen($verlanglijstje->name) > 50 ? "..." : ""}}"</b> verwijderen?
                                                 </div>
                                                 <div class="modal-footer">
                                                     {!! Form::open(['route' => ['verlanglijstjes.destroy', $verlanglijstje->id], 'method' => 'DELETE', 'class' => 'red-btn'] )!!}
