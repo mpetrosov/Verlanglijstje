@@ -18,7 +18,7 @@ html, body {
 }
 
 body {
-    background: url(../images/background2.jpg);
+    background: url(../images/background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -77,7 +77,8 @@ body {
 
 .nav-link {
     color: #ffffff !important;
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: 600;
 }
 
 .nav-link:hover {
@@ -268,15 +269,13 @@ body {
     padding: 20px 0 30px 0;
 }
 
-
-
 p {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 1.6em;
-    /* word-break: keep-all; */
+    word-break: keep-all;
     padding: 5px 20px;
-    word-break: break-all;
+    /* word-break: break-all; */
 }
 
 .p:first-of-type {

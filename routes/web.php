@@ -15,9 +15,11 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/','PageController@getIndex');
 
-    // Route::resource('posts', 'PostController');
+    Route::get('/nieuw', 'VerlanglijstjeController@create');
+
+    Route::resource('verlanglijstje', 'VerlanglijstjeController');
 
 });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

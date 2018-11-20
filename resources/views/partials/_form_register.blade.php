@@ -1,4 +1,4 @@
-<a class="nav-link" href="#" data-toggle="modal" data-target="#register">Registreer</a>
+<a class="nav-link" href="#" data-toggle="modal" data-target="#register">registreer</a>
 <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="register" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

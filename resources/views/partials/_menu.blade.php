@@ -6,10 +6,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-link {{ Request::is('/') ? "nav-active" : "" }}" href="/">Home</a>
+            <a class="nav-link {{ Request::is('/') ? "nav-active" : "" }}" href="/">home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('contact') ? "nav-active" : "" }}" href="/contact">Contact</a>
+                <a class="nav-link {{ Request::is('contact') ? "nav-active" : "" }}" href="/contact">contact</a>
             </li>
             <li class="nav-item">
                 @include('partials/_form_register')

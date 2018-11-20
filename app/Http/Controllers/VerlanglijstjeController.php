@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class VerlanglijstjeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +28,7 @@ class VerlanglijstjeController extends Controller
      */
     public function create()
     {
-        //
+        return view('verlanglijstjes/create');
     }
 
     /**
@@ -35,7 +39,24 @@ class VerlanglijstjeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, array(
+            'naam' => 'required|min:2|max:255',
+        ));
+
+        if (Auth::check())
+        {
+            $verlanglijstje = new Verlanglijstje;
+            $verlanglijstje->naam = $request->naam;
+            $verlanglijstje->user_id = Auth::id();
+            $verlanglijstje->save();
+
+            Session::flash('succes', 'Het lijstje' . $request->naam . 'is toegevoegd!');
+            // RETURN NAAR TOEVOEGEN ITEMS
+            return redirect()->route('posts.show', $post->id);
+        }
+
+
+
     }
 
     /**

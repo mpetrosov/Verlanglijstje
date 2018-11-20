@@ -1,4 +1,4 @@
-<a class="nav-link" href="#" data-toggle="modal" data-target="#login">Login</a>
+<a class="nav-link" href="#" data-toggle="modal" data-target="#login">login</a>
 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
