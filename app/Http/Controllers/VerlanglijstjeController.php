@@ -98,10 +98,13 @@ class VerlanglijstjeController extends Controller
      * @param  \App\Verlanglijstje  $verlanglijstje
      * @return \Illuminate\Http\Response
      */
-    public function edit(Verlanglijstje $verlanglijstje)
+    public function edit(Verlanglijstje $id)
     {
-        $verlanglijstje= Verlanglijstje::find($verlanglijstje);
-		return view('verlanglijstjes/edit')->withPost($verlanglijstje);
+        $verlanglijstje = Verlanglijstje::find($id);
+        return view('verlanglijstjes/edit')->withVerlanglijstje($verlanglijstje);
+        
+        // $post = Post::find($id);
+		// return view('posts.edit')->withPost($post);
     }
 
     /**

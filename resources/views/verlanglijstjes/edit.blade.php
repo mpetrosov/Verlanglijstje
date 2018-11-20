@@ -15,7 +15,7 @@ Wat zal de Sint jou brengen?
             </div>
             
             <div class="col-md-6 offset-md-3 bg-white padding-top-40">
-                <h1 class="display-4 text-align-center page-title">Bewerk {{ $verlanglijstje->naam }}</h1>
+                <h1 class="display-4 text-align-center page-title">Bewerk {{ $verlanglijstje->name }}</h1>
             </div>
         </div>
 
@@ -34,7 +34,7 @@ Wat zal de Sint jou brengen?
 
                             <div class="form-group row">
                                 <div class="col-md-12 my-2">
-                                    <input id="naam" type="text" class="form-control" name="naam" placeholder="lijst naam" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" placeholder="{{ $verlanglijstje->name }}" required autofocus>
                                 </div>
 
                                 <div class="col-md-12 my-2">

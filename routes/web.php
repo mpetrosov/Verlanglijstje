@@ -15,8 +15,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/','PageController@getIndex')->name('home');
 
-    // Route::get('/nieuw', 'VerlanglijstjeController@create');
-
     Route::resource('/verlanglijstjes', 'VerlanglijstjeController');
 
 });
