@@ -5,14 +5,12 @@
             <div class="modal-header">
                 <h5 class="modal-title text-center">Registreer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                                
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
-                    
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                         
@@ -63,7 +61,6 @@
                         </div>
                     </div>
                     
-                </div>
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <button type="submit" class="btn btn-primary">
@@ -73,6 +70,6 @@
                     </div>
                 </form>
                 <div class="modal-footer"></div>
-            </div>
+        </div>
     </div>
 </div>

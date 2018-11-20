@@ -6,17 +6,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-link {{ Request::is('/') ? "nav-active" : "" }}" href="/">home</a>
+                <a class="nav-link {{ Request::is('/') ? "nav-active" : "" }}" href="/">home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('contact') ? "nav-active" : "" }}" href="/contact">contact</a>
-            </li>
-            <li class="nav-item">
-                @include('partials/_form_register')
-            </li>
-            <li class="nav-item">
-                @include('partials/_form_login')
-            </li>
+
+            @include('/partials/menu/_menu_verlanglijstje')
+
+            @include('partials/menu/_menu_register')
+
+            @include('partials/menu/_menu_login')
+
+            @include('partials/menu/_form_logout')
+
         </ul>
     </div>
 </nav>
