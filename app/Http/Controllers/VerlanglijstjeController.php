@@ -38,8 +38,7 @@ class VerlanglijstjeController extends Controller
     {
         // $verlanglijstjes = Verlanglijstje::paginate(5);
         $user = Auth::id();
-        $verlanglijstjes = Verlanglijstje::where('user_id', "=", "$user")
-        ->paginate(5); 
+        $verlanglijstjes = Verlanglijstje::where('user_id', "=", "$user")->paginate(5); 
 
         return view('verlanglijstjes/index')->withVerlanglijstjes($verlanglijstjes);
     }
@@ -85,12 +84,11 @@ class VerlanglijstjeController extends Controller
      * @param  \App\Verlanglijstje  $verlanglijstje
      * @return \Illuminate\Http\Response
      */
-    public function show(Verlanglijstje $verlanglijstje)
+    public function show($id)
     {
-        $user = Auth::id();
-        $verlanglijstjes = User::find($user)->verlanglijstje;
+        $verlanglijstje = Verlanglijstje::find($id)->first();
         
-        return view('verlanglijstjes/show')->withVerlanglijstjes($verlanglijstjes);
+        return view('verlanglijstjes/show')->withVerlanglijstje($verlanglijstje);
     }
 
     /**

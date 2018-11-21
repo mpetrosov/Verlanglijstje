@@ -25,8 +25,7 @@ Bewerk {{ $verlanglijstje->name }}
             <div class="col-md-6 offset-md-3 bg-white">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>Wat hoop jij dit jaar van de Sint te krijgen?</p>
-                        <p>Maak snel een verlanglijstje en begin met het toevoegen van je wensen.</p>
+                        <p>Bewerk je verlanglijstje. Verander de naam, voeg items toe, of verwijder ze.</p>
                     </div>
 
                     <div class="col-md-6">

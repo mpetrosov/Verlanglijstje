@@ -1,7 +1,11 @@
 @extends('main')
 
 @section('addressBarTitle')
-Wat zal de Sint jou brengen?
+Jouw verlanglijstje(s)
+@endsection
+
+@section('customHead')
+
 @endsection
 
 @section('content')   
@@ -26,9 +30,10 @@ Wat zal de Sint jou brengen?
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">Titel</th>
-                                    <th scope="col">Auteur</th>
-                                    <th scope="col">URL</th>
+                                    <th scope="col" style="width: 20%">Titel</th>
+                                    <th scope="col" style="width: 10%">Auteur</th>
+                                    <th scope="col" style="width: 25%" class="px-0">URL</th>
+                                    <th scope="col" style="width: 10%"></th>
                                     {{-- <th scope="col">Gemaakt op</th>
                                     <th scope="col">Laatst bewerkt op</th> --}}
                                     <th scope="col"></th>
@@ -40,7 +45,14 @@ Wat zal de Sint jou brengen?
                             <td><a href="/verlanglijstjes/{{$verlanglijstje->id}}">{{ $verlanglijstje->name }}</a>
                             </td>
                             <td>{{ $verlanglijstje->user['name'] }}</td>
-                            <td><a href="{{ url('/') . '/' . $verlanglijstje->url }}">{{ url('/') . '/' . $verlanglijstje->url }}</a></td>
+                            <td class="px-0">
+                                <a href="{{ url('/') . '/' . $verlanglijstje->url }}" id="{{ $verlanglijstje->url }}">{{ url('/') . '/' . $verlanglijstje->url }}</a>
+                            </td>
+                            <td class="px-0">   
+                                <button class="btn btn-link" data-clipboard-text="{{ url('/') . '/' . $verlanglijstje->url }}" data-toggle="tooltip" data-placement="right" title="Kopieer de link">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                            </td>
                             {{-- <td>{{ date('j F, o', strtotime($verlanglijstje->created_at)) }}</td>
                             <td>{{ date('j F, o', strtotime($verlanglijstje->updated_at)) }}</td> --}}
                             <td>
@@ -93,5 +105,10 @@ Wat zal de Sint jou brengen?
 @endsection
 
 @section('footer') 
-
+<script>
+    new ClipboardJS('.btn');
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @endsection

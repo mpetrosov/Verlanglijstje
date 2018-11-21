@@ -12,8 +12,8 @@
     {{ Html::style('css/normalize.css') }}
     {{ Html::style('css/main.css') }}
     {{ Html::style('css/bootstrap.css') }}
-    {{ Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') }}
-    
+    {{-- {{ Html::style('https://fonts.googleapis.com/icon?family=Material+Icons') }} --}}
+    {{ Html::style('https://use.fontawesome.com/releases/v5.5.0/css/all.css') }}
     @yield('customHead')
     <style></style>
 </head>

@@ -17,7 +17,9 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::resource('/verlanglijstjes', 'VerlanglijstjeController');
 
-    Route::get('/{slug}', 'PageController@getSharedList');
+    Route::resource('/item', 'ItemController');
+
+    Route::get('/{slug}', 'PageController@getSharedList')->name('shortURL');
 
 });
 
