@@ -14,13 +14,16 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/','PageController@getIndex')->name('home');
-
+    
     Route::resource('/verlanglijstjes', 'VerlanglijstjeController');
-
+    
     Route::resource('/item', 'ItemController');
-
+    
     Route::get('/{slug}', 'PageController@getSharedList')->name('shortURL');
 
 });
+
+
+
 
 Auth::routes();

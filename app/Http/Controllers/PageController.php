@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Verlanglijstje;
+use App\item;
+
 class PageController extends Controller
 {
     public function getIndex(){
@@ -14,4 +16,6 @@ class PageController extends Controller
         $verlanglijstje = Verlanglijstje::where('url', "=", "$slug")->first();
         return view('verlanglijstjes/show')->withVerlanglijstje($verlanglijstje);
     }
+
 }
+

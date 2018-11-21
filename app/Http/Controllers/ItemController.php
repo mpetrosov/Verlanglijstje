@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
 use App\Verlanglijstje;
+use App\Item;
 use App\User;
-use Auth;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use Session;
+
 
 class ItemController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+    
+    protected $fillable = ['name', 'description', 'url', 'list_id'];
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -47,7 +47,19 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $this->validate($request, [
+        //     'name' => 'required|string'
+        // ]);
+        
+        $item = new Item();
+        $item->name = $request->name;
+        $item->description = "omschrijving";
+        $item->url = "test";
+        $item->list_id = "3";
+
+        $item->save();
+            
+        return response()->json(['success' => "De wens is toegevoegd"]);
     }
 
     /**
@@ -58,7 +70,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        return Item::where('list_id', "=", "$id")->get();
     }
 
     /**
@@ -94,4 +106,6 @@ class ItemController extends Controller
     {
         //
     }
+
+
 }

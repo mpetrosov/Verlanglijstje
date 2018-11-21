@@ -24,6 +24,33 @@ Jouw verlanglijstje(s)
         </div>
 
         <div class="row">
+                <div class="col-md-6 offset-md-3 bg-white">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Wat hoop jij dit jaar van de Sint te krijgen?</p>
+                            <p>Maak snel een verlanglijstje en begin met het toevoegen van je wensen.</p>
+                        </div>
+    
+                        <div class="col-md-6">
+                                {!! Form::open(array('route' => 'verlanglijstjes.store' )) !!}
+                                {{ csrf_field() }}
+    
+                                <div class="form-group row">
+                                    <div class="col-md-12 my-2">
+                                        <input id="naam" type="text" class="form-control" name="naam" placeholder="lijst naam" required autofocus>
+                                    </div>
+    
+                                    <div class="col-md-12 my-2">
+                                        <button type="submit" class="btn btn-outline-primary btn-block">Sla op</button>
+                                    </div>
+                                </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-6 offset-md-3 bg-white">
                 <div class="row">
                     <div class="col-md-12">

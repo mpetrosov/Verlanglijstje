@@ -1,6 +1,7 @@
 @include('/partials/_head')
     <body>
         <div class="wrapper">
+
             @include("/partials/_menu")
                 
             @include('/partials/_header')
@@ -10,6 +11,8 @@
             @yield('content')
 
             @include('/partials/_footer')
+            
+            @include('/partials/_scripts')
         </div>
     </body>
 </html>

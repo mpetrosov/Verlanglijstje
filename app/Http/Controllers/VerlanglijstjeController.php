@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Verlanglijstje;
 use App\User;
+use App\Item;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -74,8 +75,7 @@ class VerlanglijstjeController extends Controller
 
         Session::flash('succes', 'Het lijstje is toegevoegd!');
         // RETURN NAAR TOEVOEGEN ITEMS
-        // return redirect()->route('posts.show', $post->id);
-        return redirect()->route('home');
+        return redirect()->route('verlanglijstjes.index');
     }
 
     /**
@@ -87,8 +87,8 @@ class VerlanglijstjeController extends Controller
     public function show($id)
     {
         $verlanglijstje = Verlanglijstje::find($id)->first();
-        
-        return view('verlanglijstjes/show')->withVerlanglijstje($verlanglijstje);
+        $items = Item::where('list_id', "=", "$id")->get();
+        return view('verlanglijstjes/show')->withVerlanglijstje($verlanglijstje)->with('items', $items);
     }
 
     /**
@@ -121,7 +121,8 @@ class VerlanglijstjeController extends Controller
         $verlanglijstje->save();
 
         Session::flash('succes', 'Het lijstje is bijgewerkt!');
-        return redirect()->route('home');
+        // return redirect()->route('home');
+        return redirect()->route('verlanglijstjes.show', $id);
     }
 
     /**
