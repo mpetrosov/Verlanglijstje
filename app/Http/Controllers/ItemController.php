@@ -48,13 +48,13 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $item = new Item();
-        $item->name = $request->name;
-        $item->description = "omschrijving";
-        $item->url = $request->user_id;
-        $item->list_id = "3";
+        $item->name = $request->item_name;
+        $item->description = $request->item_description;
+        $item->url = $request->item_url;
+        $item->list_id = $request->list_id;
         // dd($item);
         $item->save();
-        return $request;
+        return "het item is toegevoegd";
         
     }
 

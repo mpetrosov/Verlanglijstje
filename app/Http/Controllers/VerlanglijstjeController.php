@@ -113,16 +113,16 @@ class VerlanglijstjeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, array(
-            'naam' => 'required|min:2|max:255|alpha_num',
+            'list_name' => 'required|min:2|max:255',
         ));
-
         $verlanglijstje = Verlanglijstje::find($id);
-        $verlanglijstje->name = $request->input('naam');
+        $verlanglijstje->name = $request->input('list_name');
         $verlanglijstje->save();
 
         Session::flash('succes', 'Het lijstje is bijgewerkt!');
         // return redirect()->route('home');
-        return redirect()->route('verlanglijstjes.show', $id);
+        return "de lijst is geupdate";
+        // return redirect()->route('verlanglijstjes.show', $id);
     }
 
     /**

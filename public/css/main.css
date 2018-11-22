@@ -182,7 +182,16 @@ body {
     margin-right: auto;
     margin-left: auto;
 }
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .child {
+    display: inline-block;
+  }
+  
 .cat {
     position:absolute;
     width:400px;

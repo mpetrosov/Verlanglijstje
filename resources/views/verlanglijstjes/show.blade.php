@@ -8,6 +8,7 @@
 @endsection
 
 @section('content')
+
 <div class="row">
     <div class="col-md-6 offset-md-3 spacer-50"></div>
 </div>
@@ -18,11 +19,12 @@
     </div>
     
     <div class="col-md-6 offset-md-3 bg-white padding-top-40">
-        <h1 class="display-5 text-align-center page-title">{{ $verlanglijstje->name }} 
-            <a href="#" type="button" data-toggle="modal" data-target="#edit_{{ $verlanglijstje->id }}">
-                <i class="fas fa-pencil-alt fa-xs" data-toggle="tooltip" data-placement="right" title="Bewerk de titel"></i>
+        <div class="parent">
+            <h1 id="listTitleH1" class="child display-5 text-align-center page-title">{{ $verlanglijstje->name }}</h1>
+            <a class="child" href="#" type="button" data-toggle="modal" data-target="#edit_{{ $verlanglijstje->id }}">
+                <i class="fas fa-pencil-alt fa-2x fa-fw" data-toggle="tooltip" data-placement="right" title="Bewerk de titel"></i>
             </a>
-        </h1>
+        </div>
     </div>
 </div>
 
@@ -43,10 +45,10 @@
                     <tbody>
                         @foreach ($items as $item)
                         <tr>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->description}}</td>
-                            <td>{{$item->url}}</td>
-                            <td>
+                            <td style ="word-break:break-all;">{{$item->name}}</td>
+                            <td style ="word-break:break-all;">{{$item->description}}</td>
+                            <td style ="word-break:break-all;">{{$item->url}}</td>
+                            <td style ="word-break:break-all;">
                                 <a href="#" type="button" data-id="{{ $item->id }}" data-name="{{ $item->name }}" class="getIdToModal">
                                     <i class="fas fa-pencil-alt fa-lg" data-toggle="tooltip" data-placement="right" title="Bewerk de titel"></i>
                                 </a>
@@ -61,41 +63,24 @@
                 {{-- ITEM TABLE --}}
 
                 {{-- ADD ITEM --}}
-
                     <div class="form-group row">
-                        <input id="item_name" type="text" class="form-control" name="name" placeholder="Ik wil graag..." required autofocus>
-                        <input id="user_id" type="text"  hidden value="{{ Auth::user()->id }}">
-                        <input id="list_id" name="list_id" type="hidden" value="{{ $verlanglijstje->id }}">
+                        <input id="item_name" type="text" class="form-control" name="name" placeholder="Ik wil graag..." required>
+                        <input id="item_description" type="text" class="form-control" name="description" placeholder="Ik wil graag..." required>
+                        <input id="item_url" type="text" class="form-control" name="url" placeholder="Ik wil graag..." required>
+                        <input id="item_user_id" type="text"  hidden value="{{ Auth::user()->id }}">
+                        <input id="item_list_id" name="list_id" type="hidden" value="{{ $verlanglijstje->id }}">
                     </div>
 
                     <div class="form-group row">
                         <button id="addItemSubmitButton" class="btn btn-outline-primary btn-block">Voeg toe</button>
                     </div>
-                </form>
                 {{-- ADD ITEM --}}
             </div>
         </div>
     </div>
 </div>
 
-
-{{-- AJAX TEST --}}
-{{-- <div class="col-md-8 offset-md-2">
-        <div class="card">
-        <table>
-        <tbody id="wish-table">
-            {{-- jquery.ajax here inserts wishes
-        </tbody>
-        <tr id="new-wish-row" class="content-justify-center">
-            <td id="wish-input-count"></td>
-            <td><input type="text" id="new-wish"><input type="text" id="user-id" hidden value="{{ Auth::user()->id }}"></td>
-            <td></td>
-        </tr>
-    </table>
-</div> --}}
-{{-- AJAX TEST --}}
-
-<!-- EDIT TITLE MODEL -->
+<!-- EDIT TITLE MODAL -->
 <div class="modal fade" id="edit_{{ $verlanglijstje->id }}" tabindex="-1" role="dialog" aria-labelledby="edit_{{ $verlanglijstje->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -105,25 +90,22 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
                 <p>Verander de naam van: <b>"{{ substr($verlanglijstje->name, 0, 50) }}{{ strlen($verlanglijstje->name) > 50 ? "..." : ""}}"</b></p>
             </div>
+
             <div class="modal-footer">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12 my-2">
-                            <form action="{{ route('verlanglijstjes.update', [$verlanglijstje->id]) }}" method="POST">
-                                {{method_field('PATCH')}}
-                                {{ csrf_field() }}
+                            <div class="form-group row">
+                                <input id="list_name" type="text" class="form-control" name="naam" placeholder="nieuwe naam" required autofocus>
+                            </div>
 
-                                <div class="form-group row">
-                                    <input id="naam" type="text" class="form-control" name="naam" placeholder="nieuwe naam" required autofocus>
-                                </div>
-
-                                <div class="form-group row">
-                                    <button type="submit" class="btn btn-outline-primary btn-block">Sla op</button>
-                                </div>
-                            </form>
+                            <div class="form-group row">
+                                <button id="changeListTitleSubmitButton" class="btn btn-outline-primary btn-block">Sla op</button>
+                            </div>
                         </div>
                     </div>
                 </div>    
@@ -155,8 +137,8 @@
                                 @csrf
 
                                 <div class="form-group row" id="itemFormGroup">
-                                    {{-- <input id="naam" type="text" class="form-control" name="naam" placeholder="nieuwe naam" required autofocus>
-                                    <input id="item_id" name="item_id" type="hidden" value> --}}
+                                    <input id="naam" type="text" class="form-control" name="naam" placeholder="nieuwe naam" required autofocus>
+                                    <input id="item_id" name="item_id" type="hidden" value>
                                 </div>
 
                                 <div class="form-group row">
@@ -178,6 +160,7 @@
 @section('footer') 
 
 <script>
+// ITEM EDIT MODAL
 document.querySelectorAll('.getIdToModal').forEach(el => {
     el.addEventListener('click', e =>{
         var id = e.currentTarget.dataset.id;
@@ -196,6 +179,7 @@ document.querySelectorAll('.getIdToModal').forEach(el => {
     });
 });     
 
+// ITEM CREATE
 document.getElementById('addItemSubmitButton').onclick = function() {
     fetch('/item', {
         headers: {
@@ -208,8 +192,9 @@ document.getElementById('addItemSubmitButton').onclick = function() {
         credentials: "same-origin",
         body: JSON.stringify({
             name: jQuery('#item_name').val(),
-            user_id: jQuery('#user_id').val(),
-            list_id: jQuery('#list_id').val()
+            description: jQuery('#item_description').val(),
+            url: jQuery('#user_url').val(),
+            list_id: jQuery('#item_list_id').val()
         })
     })
     .then(response => {
@@ -220,39 +205,36 @@ document.getElementById('addItemSubmitButton').onclick = function() {
     })
 }
 
-// document.getElementById('addItemSubmitButton').onclick = function() {
-//     console.log('submitting new item');
+// LIST TITLE UPDATE
+document.getElementById('changeListTitleSubmitButton').onclick = function() {
+    var listId = jQuery('#item_list_id').val();
+    fetch('/verlanglijstjes/'+listId, {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text-plain, */*",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'put',
+        credentials: "same-origin",
+        body: JSON.stringify({
+            list_name: jQuery('#list_name').val(),
+            list_id: jQuery('#item_list_id').val()
+        })
+    })
+    .then(response => {
+        console.log('Success:', JSON.stringify(response));
+        $(`#edit_${listId}`).modal('hide');
+        document.getElementById('listTitleH1').innerText = jQuery('#list_name').val();  
 
-//         $.ajaxSetup({
-//             headers: {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             }
-//         });
-        
-//         jQuery.ajax({
-//             url: "/item",
-//             method: 'post',
-//             data: {
-//                 name: jQuery('#item_name').val(),
-//                 user_id: jQuery('#user_id').val(),
-//                 list_id: jQuery('#list_id').val()
-//             },
-
-//             success: function(result){
-//                 $('#item_name').value = '';
-//                 console.log('ajax success');
-//                 // console.log(result);
-//             },
-
-//             error: function(jqxhr, status, exception) {
-//                 console.log('Exception:', exception);
-//                 // console.log(status);
-//             }
-//         });
-// };    
-
+    })
+    .catch(function(error) {
+        console.log(error);
+    })
+}
 
 </script>
+
 <script>
     new ClipboardJS('.fas');
     $(function () {
