@@ -26,25 +26,9 @@ Jouw verlanglijstje(s)
         <div class="row">
                 <div class="col-md-6 offset-md-3 bg-white">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <p>Wat hoop jij dit jaar van de Sint te krijgen?</p>
                             <p>Maak snel een verlanglijstje en begin met het toevoegen van je wensen.</p>
-                        </div>
-    
-                        <div class="col-md-6">
-                                {!! Form::open(array('route' => 'verlanglijstjes.store' )) !!}
-                                {{ csrf_field() }}
-    
-                                <div class="form-group row">
-                                    <div class="col-md-12 my-2">
-                                        <input id="naam" type="text" class="form-control" name="naam" placeholder="lijst naam" required autofocus>
-                                    </div>
-    
-                                    <div class="col-md-12 my-2">
-                                        <button type="submit" class="btn btn-outline-primary btn-block">Sla op</button>
-                                    </div>
-                                </div>
-                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
@@ -90,35 +74,35 @@ Jouw verlanglijstje(s)
                                     {{-- DELETE BUTTON --}}
                                     <button type="button" class="btn btn-outline-danger btn-sm mx-2" data-toggle="modal" data-target="#delete_{{ $verlanglijstje->id }}">Verwijder</button>
                                     
-                                    <!-- DELETE MODEL -->
-                                    <div class="modal fade" id="delete_{{ $verlanglijstje->id }}" tabindex="-1" role="dialog" aria-labelledby="delete_{{ $verlanglijstje->id }}" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <i class="material-icons modal-iconerror_outline"></i><h5 class="modal-title text-center">Weet je het zeker?</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Wil je de lijst <b>"{{ substr($verlanglijstje->name, 0, 50) }}{{ strlen($verlanglijstje->name) > 50 ? "..." : ""}}"</b> verwijderen?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    {!! Form::open(['route' => ['verlanglijstjes.destroy', $verlanglijstje->id], 'method' => 'DELETE', 'class' => 'red-btn'] )!!}
-                                                    {!! Form::submit('Ja', array($verlanglijstje->id), array('class' => 'btn btn-danger mx-2 button150 btn-sm')) !!}
-                                                    {!! Form::close() !!}
-                                                    <button type="button" class="btn btn-secondary mx-2 button150 btn-sm" data-dismiss="modal">Nee</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- DELETE MODEL -->
                                 </div>  
                             </td>
                         </tr>
                         @endforeach
                     </table>
-                </div>
+                    {!! Form::open(array('route' => 'verlanglijstjes.store' )) !!}
+                    {{ csrf_field() }}
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input id="naam" type="text" class="form-control" name="naam" placeholder="lijst naam" required autofocus>
+                        </div>
+
+                        <div class="col-md-12 my-2">
+                            <button type="submit" class="btn btn-outline-primary btn-block">Voeg toe</button>
+                        </div>
+                    </div>
+                {!! Form::close() !!}
+
+{{--               TO DO AJAX  
+                    <div class="form-group row">
+                            <input id="list_name" type="text" class="form-control" name="name" placeholder="Ik wil graag..." required>
+                            <input id="item_user_id" type="text"  hidden value="{{ Auth::user()->id }}">
+                        </div>
+    
+                        <div class="form-group row">
+                            <button id="addListSubmitButton" class="btn btn-outline-primary btn-block">Voeg lijst</button>
+                        </div>
+                    </div> --}}
             </div>
             <section class="flex-section">    
                 <div class="text-center text-align-center">
@@ -128,6 +112,29 @@ Jouw verlanglijstje(s)
         </div>
     </div>
     
+    <!-- DELETE MODAL -->
+    <div class="modal fade" id="delete_{{ $verlanglijstje->id }}" tabindex="-1" role="dialog" aria-labelledby="delete_{{ $verlanglijstje->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="material-icons modal-iconerror_outline"></i><h5 class="modal-title text-center">Weet je het zeker?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Wil je de lijst <b>"{{ substr($verlanglijstje->name, 0, 50) }}{{ strlen($verlanglijstje->name) > 50 ? "..." : ""}}"</b> verwijderen?
+                </div>
+                <div class="modal-footer">
+                    {!! Form::open(['route' => ['verlanglijstjes.destroy', $verlanglijstje->id], 'method' => 'DELETE', 'class' => 'red-btn'] )!!}
+                    {!! Form::submit('Ja', array($verlanglijstje->id), array('class' => 'btn btn-danger mx-2 button150 btn-sm')) !!}
+                    {!! Form::close() !!}
+                    <button type="button" class="btn btn-secondary mx-2 button150 btn-sm" data-dismiss="modal">Nee</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- DELETE MODEL -->
 
 @endsection
 

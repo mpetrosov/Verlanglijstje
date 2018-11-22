@@ -63,7 +63,7 @@ class VerlanglijstjeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(
-            'naam' => 'required|min:2|max:255|alpha_num',
+            'naam' => 'required|min:2|max:255',
         ));
 
         $user = Auth::id();
@@ -99,8 +99,11 @@ class VerlanglijstjeController extends Controller
      */
     public function edit($id)
     {
+        // $verlanglijstje = Verlanglijstje::find($id)->first();
+        // return view('verlanglijstjes/edit')->withVerlanglijstje($verlanglijstje);
         $verlanglijstje = Verlanglijstje::find($id)->first();
-        return view('verlanglijstjes/edit')->withVerlanglijstje($verlanglijstje);
+        $items = Item::where('list_id', "=", "$id")->get();
+        return view('verlanglijstjes/show')->withVerlanglijstje($verlanglijstje)->with('items', $items);
     }
 
     /**

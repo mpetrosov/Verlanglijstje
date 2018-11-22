@@ -32,6 +32,7 @@
     <div class="col-md-6 offset-md-3 bg-white">
         <div class="row">
             <div class="col-md-12">
+                @if(!$items->isEmpty())
                 {{-- ITEM TABLE --}}
                 <table class="table table-striped" id="itemsTable">
                     <thead>
@@ -48,7 +49,7 @@
                             <td style ="word-break:break-all;">{{$item->name}}</td>
                             <td style ="word-break:break-all;">{{$item->description}}</td>
                             <td style ="word-break:break-all;">{{$item->url}}</td>
-                            <td style ="word-break:break-all;">
+                            <td>
                                 <a href="#" type="button" data-id="{{ $item->id }}" data-name="{{ $item->name }}" class="getIdToModal">
                                     <i class="fas fa-pencil-alt fa-lg" data-toggle="tooltip" data-placement="right" title="Bewerk de titel"></i>
                                 </a>
@@ -58,6 +59,9 @@
                             </td>
                         </tr>
                         @endforeach
+                    @else
+                    <p>Vul je eerste wens in...</p>
+                    @endif 
                     </tbody>
                 </table>
                 {{-- ITEM TABLE --}}
@@ -113,9 +117,11 @@
         </div>
     </div>
 </div>
+  
 <!-- EDIT TITLE MODEL -->
 
 <!-- EDIT ITEM MODEL -->
+@if(!$items->isEmpty())
 <div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="editItemModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -152,6 +158,7 @@
         </div>
     </div>
 </div>
+@endif
 <!-- EDIT TITLE MODEL -->
     
 
