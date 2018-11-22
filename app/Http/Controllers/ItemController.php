@@ -11,10 +11,10 @@ use App\User;
 class ItemController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     protected $fillable = ['name', 'description', 'url', 'list_id'];
 
