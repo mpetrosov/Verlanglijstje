@@ -13,7 +13,7 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/','PageController@getIndex')->name('home');
+    Route::get('/','VerlanglijstjeController@index')->name('home');
     
     Route::resource('/verlanglijstjes', 'VerlanglijstjeController');
 
@@ -25,7 +25,7 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-
-
-
 Auth::routes();
+
+
+

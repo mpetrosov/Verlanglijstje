@@ -5,9 +5,9 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ Request::is('/') ? "nav-active" : "" }}" href="/">home</a>
-            </li>
+            </li> --}}
 
             @include('partials/menu/_menu_verlanglijstje')
 

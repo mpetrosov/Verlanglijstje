@@ -68,15 +68,27 @@
 
                 {{-- ADD ITEM --}}
                     <div class="form-group row">
-                        <input id="item_name" type="text" class="form-control" name="name" placeholder="Ik wil graag..." required>
-                        <input id="item_description" type="text" class="form-control" name="description" placeholder="Ik wil graag..." required>
-                        <input id="item_url" type="text" class="form-control" name="url" placeholder="Ik wil graag..." required>
-                        <input id="item_user_id" type="text"  hidden value="{{ Auth::user()->id }}">
-                        <input id="item_list_id" name="list_id" type="hidden" value="{{ $verlanglijstje->id }}">
+                        <div class="col-md-8 offset-md-2 my-2">
+                            <input id="item_name" type="text" class="form-control" name="name" placeholder="Naam (verplicht)" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8 offset-md-2 my-2">
+                            <textarea id="item_description" type="text" class="form-control" name="description" placeholder="Omschrijving (optioneel)" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8 offset-md-2 my-2">
+                            <input id="item_url" type="text" class="form-control" name="url" placeholder="Link (optioneel)" required>
+                            <input id="item_user_id" type="text"  hidden value="{{ Auth::user()->id }}">
+                            <input id="item_list_id" name="list_id" type="hidden" value="{{ $verlanglijstje->id }}">
+                        </div>
                     </div>
 
                     <div class="form-group row">
-                        <button id="addItemSubmitButton" class="btn btn-outline-primary btn-block">Voeg toe</button>
+                        <div class="col-md-8 offset-md-2 my-2">
+                            <button id="addItemSubmitButton" class="btn btn-outline-primary btn-block">Voeg toe</button>
+                        </div>
                     </div>
                 {{-- ADD ITEM --}}
             </div>
@@ -143,7 +155,7 @@
                                 @csrf
 
                                 <div class="form-group row" id="itemFormGroup">
-                                    <input id="naam" type="text" class="form-control" name="naam" placeholder="nieuwe naam" required autofocus>
+                                    <input id="naam" type="text" class="form-control" name="naam" placeholder="nieuwe naam" required>
                                     <input id="item_id" name="item_id" type="hidden" value>
                                 </div>
 

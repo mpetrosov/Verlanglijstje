@@ -83,11 +83,11 @@ Jouw verlanglijstje(s)
                     {{ csrf_field() }}
 
                     <div class="form-group row">
-                        <div class="col-md-12">
+                        <div class="col-md-8 offset-md-2 my-2">
                             <input id="naam" type="text" class="form-control" name="naam" placeholder="lijst naam" required autofocus>
                         </div>
 
-                        <div class="col-md-12 my-2">
+                        <div class="col-md-8 offset-md-2 my-2">
                             <button type="submit" class="btn btn-outline-primary btn-block">Voeg toe</button>
                         </div>
                     </div>
