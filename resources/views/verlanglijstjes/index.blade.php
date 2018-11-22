@@ -89,9 +89,9 @@ Jouw verlanglijstje(s)
                                     
                                     {{-- DELETE BUTTON --}}
                                     <button type="button" class="btn btn-outline-danger btn-sm mx-2" data-toggle="modal" data-target="#delete_{{ $verlanglijstje->id }}">Verwijder</button>
+                                    
+                                    <!-- DELETE MODEL -->
                                     <div class="modal fade" id="delete_{{ $verlanglijstje->id }}" tabindex="-1" role="dialog" aria-labelledby="delete_{{ $verlanglijstje->id }}" aria-hidden="true">
-                                        
-                                        <!-- DELETE MODEL -->
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -111,8 +111,8 @@ Jouw verlanglijstje(s)
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- DELETE MODEL -->
                                     </div>
+                                    <!-- DELETE MODEL -->
                                 </div>  
                             </td>
                         </tr>

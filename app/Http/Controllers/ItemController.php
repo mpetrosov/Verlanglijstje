@@ -47,19 +47,15 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'name' => 'required|string'
-        // ]);
-        
         $item = new Item();
         $item->name = $request->name;
         $item->description = "omschrijving";
-        $item->url = "test";
+        $item->url = $request->user_id;
         $item->list_id = "3";
-
+        // dd($item);
         $item->save();
-            
-        return response()->json(['success' => "De wens is toegevoegd"]);
+        return $request;
+        
     }
 
     /**
@@ -79,7 +75,7 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         //
     }
@@ -91,7 +87,7 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
     }
@@ -105,6 +101,11 @@ class ItemController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getItems($id)
+    {
+        return Item::where('list_id', "=", "$id")->get();
     }
 
 
