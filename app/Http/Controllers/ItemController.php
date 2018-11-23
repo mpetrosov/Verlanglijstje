@@ -64,6 +64,9 @@ class ItemController extends Controller
         // return $item;
         $item->save();
         // return "het item is toegevoegd";
+        $verlanglijstje = Verlanglijstje::where('id', "=", "$id")->first();
+        $items = Item::where('list_id', "=", "$id")->get();
+        return view('verlanglijstjes/show')->withVerlanglijstje($verlanglijstje)->with('items', $items);
     }
 
     /**

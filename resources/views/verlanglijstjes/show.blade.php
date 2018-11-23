@@ -55,10 +55,10 @@
                             <td style ="word-break:break-all;">{{$item->url}}</td>
                             @auth
                             <td>
-                                <a href="#" type="button" data-id="{{ $item->id }}" data-name="{{ $item->name }}" class="getIdToModal">
+                                <a href="#" type="button" data-id="{{ $item->id }}" data-name="{{ $item->name }}" class="itemEditModal">
                                     <i class="fas fa-pencil-alt fa-lg" data-toggle="tooltip" data-placement="right" title="Bewerk de titel"></i>
                                 </a>
-                                <a href="#" type="button" data-toggle="modal" data-target="#delete_{{ $item->id }}">
+                                <a href="#" type="button" data-toggle="modal" data-target="#delete_{{ $item->id }}" class="itemDeleteModal">
                                     <i class="fas fa-trash-alt fa-lg" data-toggle="tooltip" data-placement="right" title="Bewerk de titel"></i>
                                 </a>
                             </td>
@@ -143,7 +143,7 @@
 
 <!-- EDIT ITEM MODEL -->
 @if(!$items->isEmpty())
-<div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="editItemModal" aria-hidden="true">
+<div class="modal fade" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="itemEditModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -181,7 +181,47 @@
 </div>
 @endif
 <!-- EDIT TITLE MODEL -->
-    
+
+<!-- DELETE ITEM MODEL -->
+@if(!$items->isEmpty())
+<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="itemDeleteModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="material-icons modal-iconerror_outline"></i><h5 class="modal-title text-center"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="item_name"></p>
+            </div>
+            <div class="modal-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 my-2" id="editItemForm">
+                            <form action="{{ route('item.update', [$item->id]) }}" method="POST">
+                                @method('PATCH')
+                                @csrf
+
+                                <div class="form-group row" id="itemFormGroup">
+                                    <input id="naam" type="text" class="form-control" name="naam" placeholder="nieuwe naam" required>
+                                    <input id="item_id" name="item_id" type="hidden" value>
+                                </div>
+
+                                <div class="form-group row">
+                                    <button type="submit" class="btn btn-outline-primary btn-block">Sla op</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+<!-- EDIT TITLE MODEL -->
 
 @endsection
 
@@ -189,7 +229,7 @@
 
 <script>
 // ITEM EDIT MODAL
-document.querySelectorAll('.getIdToModal').forEach(el => {
+document.querySelectorAll('.itemEditModal').forEach(el => {
     el.addEventListener('click', e =>{
         var id = e.currentTarget.dataset.id;
         var name = e.currentTarget.dataset.name;
@@ -203,7 +243,53 @@ document.querySelectorAll('.getIdToModal').forEach(el => {
         modal.find('#item_id').value = id;
         $('#editItemModal').modal('toggle');
     });
-});     
+});  
+
+//ITEM EDIT FUNCTION
+document.getElementById('changeListTitleSubmitButton').onclick = function() {
+    var listId = jQuery('#item_list_id').val();
+    fetch('/verlanglijstjes/'+listId, {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text-plain, */*",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'put',
+        credentials: "same-origin",
+        body: JSON.stringify({
+            list_name: jQuery('#list_name').val(),
+            list_id: jQuery('#item_list_id').val()
+        })
+    })
+    .then(response => {
+        console.log('Success:', JSON.stringify(response));
+        $(`#edit_${listId}`).modal('hide');
+        document.getElementById('listTitleH1').innerText = jQuery('#list_name').val();  
+
+    })
+    .catch(function(error) {
+        console.log(error);
+    })
+}
+
+
+// ITEM DELETE MODAL
+document.querySelectorAll('.itemDeleteModal').forEach(el => {
+    el.addEventListener('click', e =>{
+        var id = e.currentTarget.dataset.id;
+        var name = e.currentTarget.dataset.name;
+        console.log(name);
+        console.log(id);
+        var modal = $('#deleteItemModal');
+        document.getElementById('itemFormGroup').innerHTML = `<input id="naam" type="text" class="form-control" name="naam" placeholder="nieuwe naam" required autofocus><input id="item_id" name="item_id" type="hidden" value="${id}">`
+
+        modal.find('#item_name').html("Verander de naam van: <b>"+name+"</b>");
+        // modal.find('#itemFormGroup').html("<input id=\"naam\" type=\"text\" class=\"form-control\" name=\"naam\" placeholder=\"nieuwe naam\" required autofocus><input id=\"item_id\" name=\"item_id\" type=\"hidden\" value="+id+">");
+        modal.find('#item_id').value = id;
+        $('#editItemModal').modal('toggle');
+    });
+});  
 
 // ITEM CREATE
 document.getElementById('addItemSubmitButton').onclick = function() {
@@ -225,6 +311,7 @@ document.getElementById('addItemSubmitButton').onclick = function() {
     })
     .then(response => {
         console.log('Success:', response);
+        location.reload(); 
     })
     .catch(function(error) {
         console.log(error);
