@@ -13,11 +13,11 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/','VerlanglijstjeController@index')->name('home');
+    Route::get('/','PageController@getIndex')->name('home');
     
     Route::resource('/verlanglijstjes', 'VerlanglijstjeController');
 
-    Route::get('/item/get/{slug}', 'ItemController@getItems');
+    Route::get('/item/get/{list_id}', 'ItemController@getItems');
     
     Route::resource('/item', 'ItemController');
     

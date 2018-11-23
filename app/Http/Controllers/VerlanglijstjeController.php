@@ -12,6 +12,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Session;
+use Log;
 
 class VerlanglijstjeController extends Controller
 {
@@ -41,6 +42,7 @@ class VerlanglijstjeController extends Controller
         $user = Auth::id();
         $verlanglijstjes = Verlanglijstje::where('user_id', "=", "$user")->paginate(5); 
 
+        // Log::error($verlanglijstjes);
         return view('verlanglijstjes/index')->withVerlanglijstjes($verlanglijstjes);
     }
 
@@ -73,7 +75,7 @@ class VerlanglijstjeController extends Controller
         $verlanglijstje->url = $this->random_str(8);
         $verlanglijstje->save();
 
-        Session::flash('succes', 'Het lijstje is toegevoegd!');
+        // Session::flash('succes', 'Het lijstje is toegevoegd!');
         // RETURN NAAR TOEVOEGEN ITEMS
         return redirect()->route('verlanglijstjes.index');
     }
@@ -86,7 +88,7 @@ class VerlanglijstjeController extends Controller
      */
     public function show($id)
     {
-        $verlanglijstje = Verlanglijstje::find($id)->first();
+        $verlanglijstje = Verlanglijstje::where('id', "=", "$id")->first();
         $items = Item::where('list_id', "=", "$id")->get();
         return view('verlanglijstjes/show')->withVerlanglijstje($verlanglijstje)->with('items', $items);
     }
@@ -99,7 +101,7 @@ class VerlanglijstjeController extends Controller
      */
     public function edit($id)
     {
-        // $verlanglijstje = Verlanglijstje::find($id)->first();
+        // $verlanglijstje = Verlanglijstje::find($id)->    first();
         // return view('verlanglijstjes/edit')->withVerlanglijstje($verlanglijstje);
         $verlanglijstje = Verlanglijstje::find($id)->first();
         $items = Item::where('list_id', "=", "$id")->get();
@@ -122,7 +124,7 @@ class VerlanglijstjeController extends Controller
         $verlanglijstje->name = $request->input('list_name');
         $verlanglijstje->save();
 
-        Session::flash('succes', 'Het lijstje is bijgewerkt!');
+        // Session::flash('succes', 'Het lijstje is bijgewerkt!');
         // return redirect()->route('home');
         return "de lijst is geupdate";
         // return redirect()->route('verlanglijstjes.show', $id);
@@ -143,7 +145,7 @@ class VerlanglijstjeController extends Controller
         $user = Auth::id();
         $verlanglijstjes = Verlanglijstje::where('user_id', "=", "$user")->paginate(5); 
         
-        Session::flash('succes', "het lijstje is verwijderd");
+        // Session::flash('succes', "het lijstje is verwijderd");
         return view('verlanglijstjes/index')->withVerlanglijstjes($verlanglijstjes);
     }
 }

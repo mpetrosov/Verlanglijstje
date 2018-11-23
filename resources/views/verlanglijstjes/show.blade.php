@@ -21,9 +21,11 @@
     <div class="col-md-6 offset-md-3 bg-white padding-top-40">
         <div class="parent">
             <h1 id="listTitleH1" class="child display-5 text-align-center page-title">{{ $verlanglijstje->name }}</h1>
+            @auth
             <a class="child" href="#" type="button" data-toggle="modal" data-target="#edit_{{ $verlanglijstje->id }}">
                 <i class="fas fa-pencil-alt fa-2x fa-fw" data-toggle="tooltip" data-placement="right" title="Bewerk de titel"></i>
             </a>
+            @endauth
         </div>
     </div>
 </div>
@@ -40,7 +42,9 @@
                             <th scope="col" style="width: 25%">Naam</th>
                             <th scope="col" style="width: 25%">Omschrijving</th>
                             <th scope="col" style="width: 25%">Link</th>
+                            @auth
                             <th scope="col">edit/delete</th>
+                            @endauth
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +53,7 @@
                             <td style ="word-break:break-all;">{{$item->name}}</td>
                             <td style ="word-break:break-all;">{{$item->description}}</td>
                             <td style ="word-break:break-all;">{{$item->url}}</td>
+                            @auth
                             <td>
                                 <a href="#" type="button" data-id="{{ $item->id }}" data-name="{{ $item->name }}" class="getIdToModal">
                                     <i class="fas fa-pencil-alt fa-lg" data-toggle="tooltip" data-placement="right" title="Bewerk de titel"></i>
@@ -57,24 +62,28 @@
                                     <i class="fas fa-trash-alt fa-lg" data-toggle="tooltip" data-placement="right" title="Bewerk de titel"></i>
                                 </a>
                             </td>
+                            @endauth
                         </tr>
                         @endforeach
+                    
                     @else
-                    <p>Vul je eerste wens in...</p>
-                    @endif 
+                    @auth<p>Vul je eerste wens in...</p>@endauth
+                    @endif
+                    
                     </tbody>
                 </table>
                 {{-- ITEM TABLE --}}
 
+@auth
                 {{-- ADD ITEM --}}
                     <div class="form-group row">
                         <div class="col-md-8 offset-md-2 my-2">
-                            <input id="item_name" type="text" class="form-control" name="name" placeholder="Naam (verplicht)" required>
+                            <input id="item_name" type="text" class="form-control" name="item_name" placeholder="Naam (verplicht)" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-8 offset-md-2 my-2">
-                            <textarea id="item_description" type="text" class="form-control" name="description" placeholder="Omschrijving (optioneel)" required></textarea>
+                            <textarea id="item_description" class="form-control" name="item_description" placeholder="Omschrijving (optioneel)" required></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -189,8 +198,6 @@ document.querySelectorAll('.getIdToModal').forEach(el => {
         var modal = $('#editItemModal');
         document.getElementById('itemFormGroup').innerHTML = `<input id="naam" type="text" class="form-control" name="naam" placeholder="nieuwe naam" required autofocus><input id="item_id" name="item_id" type="hidden" value="${id}">`
 
-
-
         modal.find('#item_name').html("Verander de naam van: <b>"+name+"</b>");
         // modal.find('#itemFormGroup').html("<input id=\"naam\" type=\"text\" class=\"form-control\" name=\"naam\" placeholder=\"nieuwe naam\" required autofocus><input id=\"item_id\" name=\"item_id\" type=\"hidden\" value="+id+">");
         modal.find('#item_id').value = id;
@@ -212,12 +219,12 @@ document.getElementById('addItemSubmitButton').onclick = function() {
         body: JSON.stringify({
             name: jQuery('#item_name').val(),
             description: jQuery('#item_description').val(),
-            url: jQuery('#user_url').val(),
+            url: jQuery('#item_url').val(),
             list_id: jQuery('#item_list_id').val()
         })
     })
     .then(response => {
-        console.log('Success:', JSON.stringify(response));
+        console.log('Success:', response);
     })
     .catch(function(error) {
         console.log(error);
@@ -253,7 +260,7 @@ document.getElementById('changeListTitleSubmitButton').onclick = function() {
 }
 
 </script>
-
+@endauth
 <script>
     new ClipboardJS('.fas');
     $(function () {

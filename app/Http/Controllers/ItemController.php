@@ -6,15 +6,13 @@ use Illuminate\Http\Request;
 use App\Verlanglijstje;
 use App\Item;
 use App\User;
+use Log;
+use Response;
 
 
 class ItemController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     
     protected $fillable = ['name', 'description', 'url', 'list_id'];
 
@@ -23,6 +21,16 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function getItems($id)
+    {
+        // Log::error(Item::where('list_id', "=", "$id")->get());
+        $item = Item::where('list_id', "=", "$id")->get();
+        // Log::error ('de naam is: ' + $item->name);
+        // name', 'description', 'url', 'list_id']
+        return Response::json(array('name' => $item->name, 'description' => $item->description, 'url' => $item->url, 'list_id' => $item->list_id));
+    }
+
 
     public function index()
     {
@@ -48,14 +56,14 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $item = new Item();
-        $item->name = $request->item_name;
-        $item->description = $request->item_description;
-        $item->url = $request->item_url;
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->url = $request->url;
         $item->list_id = $request->list_id;
-        // dd($item);
-        $item->save();
-        return "het item is toegevoegd";
         
+        // return $item;
+        $item->save();
+        // return "het item is toegevoegd";
     }
 
     /**
@@ -103,10 +111,7 @@ class ItemController extends Controller
         //
     }
 
-    public function getItems($id)
-    {
-        return Item::where('list_id', "=", "$id")->get();
-    }
+
 
 
 }
